@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link mx-5" aria-current="page" href="/insert">Add Student</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link mx-5" href="/update">Update Existing Student</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-5" href="delete">Delete Student</a>
+        </li>
+      </ul>
+      <br>
+      <h3 class="heading3">DELETE STUDENT </h3>
+<form action="/delete">
+    {% csrf_token %}
+   
+            <label for="name" class="form-label">Enter Roll:</label></td>
+            <input type="number" class="form-control"name="name" placeholder="Enter Roll Number" required>
+       
+        <br>
+            <button type="submit"  class="btn btn-danger " name="submit">Delete Student</button>
+        </form>
+{% endblock body %}

@@ -1,0 +1,80 @@
+{% extends 'insert.html' %}
+{% block content %}
+<style>
+.scrollspy-example {
+    position: relative;
+    height: 500px;
+    overflow: auto;
+  }
+</style>
+<div class="row">
+    <div class="col-sm-5">
+        <h4 class="text-center alert alert-info">ADD STUDENT</h4>
+    <form action="/insert2" method="POST">
+    {% csrf_token %}
+   
+            <label for="name" class="form-label">Name:</label></td>
+            <input type="text" class="form-control"name="Name" placeholder="Enter your name" required>
+        <br>
+            <label for="" class="form-label">Behavioural Score:</label>
+           <input type="number" class="form-control"name="Behavioral" placeholder="Enter behavioural score" required>
+        <br>
+            <label for="" class="form-label">Attendence Score:</label></td>
+            <input type="number" class="form-control" name="Attendence" placeholder="Enter Attendence score" required>
+        <br>
+        <label for="" class="form-label">Marks Score:</label></td>
+            <input type="number" class="form-control" name="Marks" placeholder="Enter Marks score" required>
+        <br>
+            <button type="submit"  class="btn btn-success" name="submit">Add Student</button>
+        </form>
+    </div>
+    <div class="col-sm-7">
+        <h4 class="text-center alert alert-info">Show Student</h4>
+        {% if qs %}
+        <div
+      data-mdb-spy="scroll"
+      data-mdb-target="#scrollspy1"
+      data-mdb-offset="0"
+      class="scrollspy-example"
+    >
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">ATTENDENCE</th>
+                <th scope="col">MARKS</th>
+                <th scope="col">BEHAVIOURAL</th>
+                <th scope="col">ACTION1</th>
+                <th scope="col">ACTION2</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for st in qs%}
+              <tr>
+                <th scope="row">{{st.id}}</th>
+                <td>{{st.Name}}</td>
+                <td>{{st.Attendence}}</td>
+                <td>{{st.Marks}}</td>
+                <td>{{st.Behavioral}}</td>
+                <td><form action="{%url 'update' st.id%}" method="post">
+                    {% csrf_token %}
+                    <input type="submit"  class="btn btn-warning" value="EDIT">
+                </form></td>
+                <td><form action="{%url 'deletedata' st.id%}" method="post">
+                    {% csrf_token %}
+                    <input type="submit"  class="btn btn-danger" value="Delete">
+                </form>
+                </td>
+
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <h4 class="text-center alert alert-warning"> No Record</h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

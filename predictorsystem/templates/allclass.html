@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+<h3 class="text-center alert alert-info"> TYIT OVER ALL CLASS PERFORMANCE</h3> 
+<div class="container">
+  <div class="row mx-5">
+      <div class="col-sm-9"> 
+<form action="/allclass" method="GET">
+    <label for="cars" class="form-label">Select A particular graph:</label>
+    <select  class="form-control" name="Plotting">
+      <option value="class_bar" name="class_bar" class="select-wrapper">Class Bar Graph</option>
+      <option value="class_line" name="class_line" class="select-wrapper">Class Line Graph</option>
+      <option value="Attendence_bar" name="Attendence_bar" class="select-wrapper">Class Attendence Only</option>
+      <option value="Behaviour_bar" name="Behaviour_bar" class="select-wrapper">Class Behaviour Only</option>
+      <option value="Marks_bar" name="Marks_bar" class="select-wrapper">Class Marks Only</option>
+      
+    </select>
+    <br>
+    <input type="submit" class="btn btn-success" value="Show Peformance">
+  </form>
+</div>
+</div>
+</div>
+ <br>
+ <br>
+ <div class="mychart">
+  {%if chart%}
+    <img src="data:image/png;base64,{{chart|safe}}">
+    {% else %}
+      <p class="mess">Please Refresh and Wait for Some Time</p>
+    {% endif %}
+</div>
+
+  
+
+{% endblock body %}
